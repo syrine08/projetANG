@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Product} from './product.model';
 import {Composition} from './composition.model';
+import {CompositionService} from './composition.service';
 
 
 @Injectable()
@@ -22,11 +23,12 @@ export class ProductService{
         new Composition(' Meat', 1)
       ])
   ];
-  constructor() {
+  constructor(private compositionService: CompositionService) {
   }
   getProduct() {
     return this.product.slice();
   }
-  toShoppingList() {
+  toCompositionList(compositions: Composition[]) {
+    this.compositionService.Addcompositions(compositions);
   }
 }

@@ -9,6 +9,10 @@ import {ProductListComponent} from './products/product-list/product-list.compone
 import {ProductItemComponent} from './products/product-list/product-item/product-item.component';
 import {getParseErrors} from '@angular/compiler';
 import {ProductService} from './shared/product.service';
+import {ProductDetailComponent} from './products/product-detail/product-detail.component';
+import {CompositionService} from './shared/composition.service';
+import { CompositionListComponent } from './composition-list/composition-list.component';
+import {CompositionEditComponent} from './composition-list/composition-edit/composition-edit.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +20,16 @@ import {ProductService} from './shared/product.service';
     NavBarComponent,
     ProductsComponent,
     ProductListComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    ProductDetailComponent,
+    CompositionListComponent,
+    CompositionEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CompositionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

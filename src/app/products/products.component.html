@@ -3,6 +3,12 @@
     <app-product-list></app-product-list>
   </div>
   <div class="col-md-7">
-
+    <app-product-detail
+    *ngIf="selectedProduct; else infoText"
+    [product]="selectedProduct">
+    </app-product-detail>
+    <ng-template #infoText>
+      <p>Please select a Product!</p>
+    </ng-template>
   </div>
 </div>

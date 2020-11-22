@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-xs-10">
+    <app-composition-edit></app-composition-edit>
+    <hr>
+    <ul class="list-group">
+      <a
+        class="list-group-item"
+        style="cursor: pointer"
+        *ngFor="let composition of compositions"
+      >
+        {{ composition.name }} ({{ composition.amout }})
+      </a>
+    </ul>
+  </div>
+</div>
