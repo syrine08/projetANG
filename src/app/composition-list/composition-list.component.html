@@ -6,7 +6,8 @@
       <a
         class="list-group-item"
         style="cursor: pointer"
-        *ngFor="let composition of compositions"
+        *ngFor="let composition of compositions; let i = index "
+        (click)="onEditItem(i)"
       >
         {{ composition.name }} ({{ composition.amout }})
       </a>

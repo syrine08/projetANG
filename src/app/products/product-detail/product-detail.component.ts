@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Product} from '../../shared/product.model';
 import {ProductService} from '../../shared/product.service';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 
 @Component({
@@ -8,13 +9,29 @@ import {ProductService} from '../../shared/product.service';
   templateUrl: './product-detail.component.html'
 })
 export class ProductDetailComponent implements OnInit {
-  @Input() product: Product;
-
-  constructor(private productService: ProductService) { }
+   product: Product;
+   id: number;
+  constructor(private productService: ProductService,
+              private route: ActivatedRoute,
+              private router: Router) {
+  }
 
   ngOnInit() {
+   this.route.params.subscribe(
+     (params: Params) => {
+       this.id = +params['id'];
+       this.product = this.productService.getProdocByID(this.id);
+     }
+   );
   }
   onAddCmp() {
     this.productService.toCompositionList(this.product.compositions);
+  }
+  onEditProd(){
+    this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
+  }
+  onDeleteProd(){
+    this.productService.deleteProduct(this.id);
+    this.router.navigate(['/products']);
   }
 }

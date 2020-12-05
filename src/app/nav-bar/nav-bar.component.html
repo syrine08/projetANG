@@ -6,11 +6,11 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#" (click)="onSelect('product')">Products</a>
+      <li class="nav-item " routerLinkActive="active">
+        <a class="nav-link" routerLink="/products">Products</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" (click)="onSelect('composition')">Composition</a>
+      <li routerLinkActive="active" class="nav-item">
+        <a class="nav-link" routerLink="/composition-list">Composition</a>
       </li>
 
     </ul>

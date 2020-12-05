@@ -13,22 +13,13 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
-    <div
-      class="btn-group">
-      <button
-        type="button"
-        class="btn btn-primary dropdown-toggle">
-        Manage Recipe <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li ><a href="#" (click)="onAddCmp()" style="cursor: pointer;" >To composition</a></li>
-        <li><a href="#">Edit Recipe</a></li>
-        <li><a href="#">Delete Recipe</a></li>
-      </ul>
-    </div>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button class="btn btn-success" (click)="onAddCmp()" style="cursor: pointer;" >To composition</button>
+    <button type="button" class="btn btn-danger" (click)="onEditProd()" >Edit Product</button>
+    <button type="button" class="btn btn-warning" (click)="onDeleteProd()">Delete Recipe</button>
   </div>
 </div>
+
 <div class="row">
   <div class="col-xs-12">
     {{ product.description }}

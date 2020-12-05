@@ -6,7 +6,6 @@ import {Product} from '../shared/product.model';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
-  providers: [ProductService ]
 })
 export class ProductsComponent implements OnInit {
 

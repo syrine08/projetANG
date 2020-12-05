@@ -19,5 +19,8 @@ export class CompositionListComponent implements OnInit {
       }
     );
   }
+  onEditItem(index: number){
+    this.compositionlist.startedEditing.next(index);
+  }
 
 }
