@@ -1,26 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Composition} from '../shared/composition.model';
 import {CompositionService} from '../shared/composition.service';
+import {Subscription} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-composition-list',
   templateUrl: './composition-list.component.html',
   styleUrls: ['./composition-list.component.css']
 })
-export class CompositionListComponent implements OnInit {
+export class CompositionListComponent implements OnInit , OnDestroy{
   compositions: Composition[];
-  constructor(private compositionlist: CompositionService) { }
+  subscription: Subscription;
+  constructor(private compositionlist: CompositionService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.compositions = this.compositionlist.getlist();
-    this.compositionlist.compositionChanges.subscribe(
-      (compositions: Composition[]) => {
-        this.compositions = compositions;
+    // this.compositions = this.compositionlist.getlist();
+    /*this.compositionlist.compositionChanges.subscribe(
+      () => {
+        this.getAllCmps();
+      }
+    );*/
+    this.subscription = this.compositionlist.CmpsChanged.subscribe(
+      () => {
+        this.getAllCmps();
       }
     );
+    this.getAllCmps();
   }
-  onEditItem(index: number){
-    this.compositionlist.startedEditing.next(index);
+
+  getAllCmps(){
+    this.compositionlist.getlist()
+      .subscribe(
+        (data) => {
+          this.compositions = data;
+        },
+        errors => {
+          console.log(errors);
+          alert(errors.status);
+        },
+      )
+    ;
+  }
+  onEditItem(id: number){
+    this.compositionlist.startedEditing.next(id);
+    console.log(id);
+    this.router.navigate([ id, 'edit'], {relativeTo: this.route});
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

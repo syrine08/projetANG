@@ -5,6 +5,7 @@ import {CompositionListComponent} from './composition-list/composition-list.comp
 import {ProductStartComponent} from './products/product-start/product-start.component';
 import {ProductDetailComponent} from './products/product-detail/product-detail.component';
 import {ProductEditComponent} from './products/product-edit/product-edit.component';
+import {CompositionEditComponent} from './composition-list/composition-edit/composition-edit.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,9 @@ const routes: Routes = [
       {path: ':id' , component: ProductDetailComponent},
       {path: ':id/edit' , component: ProductEditComponent}
     ]},
-  {path: 'composition-list', component: CompositionListComponent}
+  {path: 'composition-list', component: CompositionListComponent, children: [
+      {path: ':id/edit' , component: CompositionEditComponent}
+    ]}
 ];
 
 @NgModule({

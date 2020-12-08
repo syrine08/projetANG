@@ -15,6 +15,7 @@ import {CompositionEditComponent} from './composition-list/composition-edit/comp
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProductEditComponent} from './products/product-edit/product-edit.component';
 import { ProductStartComponent } from './products/product-start/product-start.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ProductStartComponent } from './products/product-start/product-start.co
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [CompositionService, ProductService],
   bootstrap: [AppComponent]

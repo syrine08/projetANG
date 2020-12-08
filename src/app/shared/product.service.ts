@@ -1,17 +1,21 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Product} from './product.model';
 import {Composition} from './composition.model';
 import {CompositionService} from './composition.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {tap} from 'rxjs/operators';
 
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductService{
   productSelected = new EventEmitter<Product>();
-  productChanged = new Subject<Product[]>();
-
-  private product: Product[] = [
+  productChanged = new Subject<void>();
+  private product: Product[];
+  /* private product: Product[] = [
     new Product('Tasty Schnitzel',
       'A super Tasty Schnitzel',
       'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
@@ -25,28 +29,70 @@ export class ProductService{
         new Composition('buns', 2),
         new Composition(' Meat', 1)
       ])
-  ];
-  constructor(private compositionService: CompositionService) {
+  ]; */
+  constructor(private compositionService: CompositionService,
+              private http: HttpClient) {
   }
-  getProduct() {
+  /*getProduct() {
     return this.product.slice();
+  }*/
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+  get refreshNeeded$() {
+    return this.productChanged;
+  }
+  getProduct(){
+    return this.http.get<any>('http://localhost:3000/product/');
   }
   getProdocByID(id: number){
-    return this.product.slice()[id];
+   //  return this.product.slice()[id];
+    return this.http.get('http://localhost:3000/product/' + id);
   }
+
   toCompositionList(compositions: Composition[]) {
-    this.compositionService.Addcompositions(compositions);
+    // this.compositionService.Addcompositions(compositions);
   }
-  addProduct(product: Product){
-    this.product.push(product);
-    this.productChanged.next(this.product.slice());
+  addProduct(product: any): Observable<any>{
+    const url = 'http://localhost:3000/product/' ;
+    return this.http.post<Product>(url, product, this.httpOptions).pipe(
+      tap(() =>  {
+        this.productChanged.next();
+      }))
+      ;
   }
-  updateProduct(index: number, newProduct: Product){
+
+
+
+
+  updateProduct(id: any, newProduct: any): Observable<any> {
+    const url: string = 'http://localhost:3000/product/' + id;
+    return this.http
+      .put(url, newProduct)
+      .pipe(
+        tap(() =>  {
+          this.productChanged.next();
+        }))
+      ;
+  }
+
+
+  /*updateProduct(index: number, newProduct: Product){
     this.product[index] = newProduct;
     this.productChanged.next(this.product.slice());
-  }
-  deleteProduct(index: number){
-    this.product.splice(index, 1);
-    this.productChanged.next(this.product.slice());
+  }*/
+  deleteProduct(id: number){
+
+    return this.http
+      .delete('http://localhost:3000/product/' + id)
+      .pipe(
+        tap(() =>  {
+          this.productChanged.next();
+        }))
+      ;;
+
   }
 }

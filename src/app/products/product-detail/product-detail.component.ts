@@ -10,7 +10,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 })
 export class ProductDetailComponent implements OnInit {
    product: Product;
-   id: number;
+   id;
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -19,19 +19,50 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
    this.route.params.subscribe(
      (params: Params) => {
-       this.id = +params['id'];
-       this.product = this.productService.getProdocByID(this.id);
+       this.id = this.route.snapshot.params['id'];
+       this
+      .productService
+      .getProdocByID
+      (this.route.snapshot.params['id'])
+      .subscribe(
+        (data: any) => {
+          this.product = data;
+          console.log(this.product);
+        }, error => {
+
+          console.log(error);
+          alert('id not found');
+        }
+      )
+    ;
      }
    );
+    /*this
+      .productService
+      .getProdocByID
+      (this.route.snapshot.params['id'])
+      .subscribe(
+        (data: any) => {
+          this.product = data;
+          console.log(this.product);
+        }, error => {
+
+          console.log(error);
+          alert('id not found');
+        }
+      )
+    ;*/
+
   }
   onAddCmp() {
     this.productService.toCompositionList(this.product.compositions);
   }
   onEditProd(){
     this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
+    console.log(this.product);
   }
   onDeleteProd(){
-    this.productService.deleteProduct(this.id);
+    this.productService.deleteProduct(this.id).subscribe();
     this.router.navigate(['/products']);
   }
 }

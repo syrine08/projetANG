@@ -6,6 +6,7 @@ import {CompositionService} from '../../shared/composition.service';
 import {NgForm} from '@angular/forms';
 import {Composition} from '../../shared/composition.model';
 import {Subscription} from 'rxjs';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 
 @Component({
@@ -16,35 +17,48 @@ export class CompositionEditComponent implements OnInit , OnDestroy{
   @ViewChild('f') CmpForm: NgForm;
   subscription: Subscription;
   editmode = false;
-  editedindex: number;
+  editedindex;
   editeditem: Composition;
-  constructor(private compositionlist: CompositionService) { }
+  constructor(private route: ActivatedRoute,
+              private compositionlist: CompositionService) { }
 
   ngOnInit() {
-   this.subscription = this.compositionlist.startedEditing
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.editedindex = +params['id'];
+        this.editmode = params['id'] != null;
+      }
+    );
+    this.subscription = this.compositionlist.startedEditing
         .subscribe(
-          (index: number) => {
-            this.editedindex = index;
+          () => {
             this.editmode = true;
-            this.editeditem = this.compositionlist.getComposition(index);
-            this.CmpForm.setValue(
-              {
-                name: this.editeditem.name ,
-                amout: this.editeditem.amout
-              }
-            );
+
+            this.compositionlist.getComposition(this.editedindex )
+              .subscribe((data: any) => {
+                  this.editeditem = data;
+                  console.log(this.editeditem);
+                  this.CmpForm.setValue(
+                  {
+                    name: this.editeditem.name ,
+                    amout: this.editeditem.amout
+                  }
+                );
+                }, error => { console.log(this.route.snapshot.params['id']); console.log(error); alert('id not found'); }
+              )
+            ;
           }
         );
   }
 
   onAddItem(form: NgForm) {
     const value = form.value;
-    const newComposition = new Composition(value.name, value.amout);
+    const newComposition = new Composition('', value.name, value.amout);
     if ( this.editmode)
     {
-      this.compositionlist.UpdateComposition(this.editedindex , newComposition);
+       this.compositionlist.UpdateComposition(this.editedindex , newComposition).subscribe();
     }else {
-      this.compositionlist.Addcomposition(newComposition);
+      this.compositionlist.Addcomposition(newComposition).subscribe();
     }
     this.editmode = false;
     form.reset();
