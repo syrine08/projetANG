@@ -53,8 +53,10 @@ export class ProductService{
     return this.http.get('http://localhost:3000/product/' + id);
   }
 
-  toCompositionList(compositions: Composition[]) {
-    // this.compositionService.Addcompositions(compositions);
+  toCompositionList(compositions: any[]) {
+     this.compositionService.Addcompositions(compositions).subscribe(
+       ( response ) => console.log(response)
+     );
   }
   addProduct(product: any): Observable<any>{
     const url = 'http://localhost:3000/product/' ;

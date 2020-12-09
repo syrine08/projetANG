@@ -2,13 +2,18 @@
   <div class="col-xs-10">
     <app-composition-edit></app-composition-edit>
     <hr>
-    <ul class="list-group">
-      <a
-        class="list-group-item"
-        style="cursor: pointer"
-        *ngFor="let composition of compositions; let i = index "
+    <div>
+      <input class="form-control mr-sm-2" [(ngModel)]="searchvalue" (input)="onsearch()"
+             type="text" placeholder="Search by name" aria-label="Search">
 
-        (click)="onEditItem(composition.id)"
+    </div>
+    <hr>
+    <ul class="list-group">
+
+         <a
+        class="list-group-item"
+
+        *ngFor="let composition of compositions; let i = index "
       >
         {{ composition.name }} ({{ composition.amout }})
       </a>

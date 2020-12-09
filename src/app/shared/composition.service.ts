@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Composition} from './composition.model';
-import {Observable, Subject} from 'rxjs';
+import {forkJoin, Observable, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Product} from './product.model';
 import {tap} from 'rxjs/operators';
@@ -35,18 +35,21 @@ export class CompositionService {
   }
   Addcomposition(composition: any): Observable<any>{
     const url = 'http://localhost:3000/Compositions/' ;
-    return this.http.post<Product>(url, composition, this.httpOptions)
+    return this.http.post<Composition>(url, composition, this.httpOptions)
       .pipe(
       tap(() =>  {
          this.CmpsChanged.next();
       }))
       ;
   }
-  /*
-  Addcompositions(compositions: Composition[]) {
-    this.compositions.push(...compositions);
-    this.compositionChanges.emit(this.compositions.slice());
-  }*/
+  Addcompositions(compositions: any[]): Observable<any>{
+    const url = 'http://localhost:3000/Compositions/' ;
+    let list = [];
+    for (let i = 0 ; i < compositions.length ; i++){
+      list.push(this.http.post(url, compositions[i]));
+    }
+    return forkJoin(list);
+  }
   UpdateComposition(id: any, newCmp: any){
     const url: string = 'http://localhost:3000/Compositions/' + id;
     return this.http
@@ -56,6 +59,12 @@ export class CompositionService {
           this.CmpsChanged.next();
         }))
       ;
+  }
+  search(q: string): Observable<any> {
+    let am = '';
+    return this.http.get(
+      'http://localhost:3000/' + 'compositions?name_like=' + q + '&amout_like=' + am
+    );
   }
   /*
   DeleteCmp(index: number){

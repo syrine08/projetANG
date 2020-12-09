@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Product} from '../../shared/product.model';
 import {ProductService} from '../../shared/product.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Composition} from '../../shared/composition.model';
+import {tap} from 'rxjs/operators';
 
 
 @Component({
@@ -13,7 +16,8 @@ export class ProductDetailComponent implements OnInit {
    id;
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -56,6 +60,7 @@ export class ProductDetailComponent implements OnInit {
   }
   onAddCmp() {
     this.productService.toCompositionList(this.product.compositions);
+    this.router.navigate(['/composition-list']);
   }
   onEditProd(){
     this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});

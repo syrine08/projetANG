@@ -68,7 +68,7 @@ export class CompositionEditComponent implements OnInit , OnDestroy{
     this.editmode = false;
   }
   onDelete(){
-    this.compositionlist.DeleteCmp(this.editedindex);
+    // this.compositionlist.DeleteCmp(this.editedindex);
     this.onClear();
   }
   ngOnDestroy() {

@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class CompositionListComponent implements OnInit , OnDestroy{
   compositions: Composition[];
   subscription: Subscription;
+  searchvalue: string;
   constructor(private compositionlist: CompositionService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -45,9 +46,18 @@ export class CompositionListComponent implements OnInit , OnDestroy{
     ;
   }
   onEditItem(id: number){
-    this.compositionlist.startedEditing.next(id);
+   // this.compositionlist.startedEditing.next(id);
     console.log(id);
     this.router.navigate([ id, 'edit'], {relativeTo: this.route});
+  }
+  onsearch(){
+    this.compositionlist.search(this.searchvalue).subscribe(
+      (data) => {
+        if ( this.searchvalue != null) {
+            this.compositions = data;
+        }
+      }
+    );
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
