@@ -3,6 +3,7 @@ import {Composition} from '../shared/composition.model';
 import {CompositionService} from '../shared/composition.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-composition-list',
@@ -50,11 +51,22 @@ export class CompositionListComponent implements OnInit , OnDestroy{
     console.log(id);
     this.router.navigate([ id, 'edit'], {relativeTo: this.route});
   }
+  /*
   onsearch(){
     this.compositionlist.search(this.searchvalue).subscribe(
       (data) => {
         if ( this.searchvalue != null) {
             this.compositions = data;
+        }
+      }
+    );
+  }*/
+  onsearchh(form: NgForm){
+    const value = form.value;
+    this.compositionlist.search(value.name, value.amount).subscribe(
+      (data) => {
+        if ( value.name != null) {
+          this.compositions = data;
         }
       }
     );

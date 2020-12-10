@@ -60,10 +60,10 @@ export class CompositionService {
         }))
       ;
   }
-  search(q: string): Observable<any> {
-    let am = '';
+  search(q: string, a: number): Observable<any> {
+
     return this.http.get(
-      'http://localhost:3000/' + 'compositions?name_like=' + q + '&amout_like=' + am
+      'http://localhost:3000/' + 'compositions?name_like=' + q + '&amout_like=' + a
     );
   }
   /*

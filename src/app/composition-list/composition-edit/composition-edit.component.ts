@@ -53,7 +53,8 @@ export class CompositionEditComponent implements OnInit , OnDestroy{
 
   onAddItem(form: NgForm) {
     const value = form.value;
-    const newComposition = new Composition('', value.name, value.amout);
+    let idd: number;
+    const newComposition = new Composition(value.id, value.name, value.amout);
     if ( this.editmode)
     {
        this.compositionlist.UpdateComposition(this.editedindex , newComposition).subscribe();
