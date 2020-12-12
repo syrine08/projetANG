@@ -1,5 +1,5 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {EventEmitter, Injectable, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subject, Subscription} from 'rxjs';
 import {Product} from './product.model';
 import {Composition} from './composition.model';
 import {CompositionService} from './composition.service';
@@ -15,6 +15,7 @@ export class ProductService{
   productSelected = new EventEmitter<Product>();
   productChanged = new Subject<void>();
   private product: Product[];
+  subscription: Subscription;
   /* private product: Product[] = [
     new Product('Tasty Schnitzel',
       'A super Tasty Schnitzel',
@@ -54,7 +55,7 @@ export class ProductService{
   }
 
   toCompositionList(compositions: any[]) {
-     this.compositionService.Addcompositions(compositions).subscribe(
+    this.subscription = this.compositionService.Addcompositions(compositions).subscribe(
        ( response ) => console.log(response)
      );
   }

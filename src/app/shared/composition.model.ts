@@ -2,8 +2,7 @@ export class Composition {
   public id: number;
   public name: string;
   public amout: number;
-  constructor(id: number, name: string, amout: number) {
-    this.id = id;
+  constructor(name: string, amout: number) {
     this.name = name;
     this.amout = amout;
   }

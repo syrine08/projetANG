@@ -5,6 +5,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Composition} from '../../shared/composition.model';
 import {tap} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 
 @Component({

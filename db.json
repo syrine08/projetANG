@@ -49,14 +49,44 @@
       "id": 1
     },
     {
-      "name": "oil essentiel",
-      "amout": 1,
-      "id": 2
+      "id": 2,
+      "name": "\tAqua",
+      "amout": 3
     },
     {
-      "name": "glycerin",
-      "amout": 1,
-      "id": 3
+      "id": 5,
+      "name": "\tAqua",
+      "amout": 3
+    },
+    {
+      "id": 6,
+      "name": "lavander oil",
+      "amout": 1
+    },
+    {
+      "id": 7,
+      "name": "\tAqua",
+      "amout": 3
+    },
+    {
+      "id": 8,
+      "name": "lavander oil",
+      "amout": 1
+    },
+    {
+      "id": 9,
+      "name": "\tAqua",
+      "amout": 3
+    },
+    {
+      "id": 10,
+      "name": "\tGlycerin",
+      "amout": 2
+    },
+    {
+      "id": 11,
+      "name": "lavander oil",
+      "amout": 1
     }
   ]
 }
