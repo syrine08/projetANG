@@ -14,6 +14,7 @@ export class CompositionListComponent implements OnInit , OnDestroy{
   compositions: Composition[];
   subscription: Subscription;
   searchvalue: string;
+  p: number = 1;
   constructor(private compositionlist: CompositionService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -70,6 +71,12 @@ export class CompositionListComponent implements OnInit , OnDestroy{
         }
       }
     );
+  }
+  annuler(){
+    this.getAllCmps();
+  }
+  onDelete(id: number){
+     this.compositionlist.DeleteCmp(id).subscribe();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

@@ -2,18 +2,41 @@
   "product": [
     {
       "id": "1",
-      "name": "Tasty Schnitzelk1",
-      "imagePath": "https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG",
-      "description": "A super Tasty  ",
+      "name": "Aloe vera gelly",
+      "imagePath": "https://tn.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/68/017/1.jpg?9281",
+      "description": "FOREVER LIVING PRODUCTS 1",
       "compositions": [
         {
           "id": "",
-          "name": "Meatt",
+          "name": "\tAqua",
           "amout": 3
         },
         {
           "id": "",
-          "name": "heh",
+          "name": "\tGlycerin",
+          "amout": 2
+        },
+        {
+          "id": "",
+          "name": "lavander oil",
+          "amout": 1
+        }
+      ]
+    },
+    {
+      "id": "t2TFEIj",
+      "name": "ARCTIC SEA",
+      "imagePath": "https://cdn.foreverliving.com/content/products/images/forever_arctic_sea_pd_main_512_X_512_1603380177382.jpg",
+      "description": "Gluten-free",
+      "compositions": [
+        {
+          "id": "",
+          "name": "gelling agent ",
+          "amout": 1
+        },
+        {
+          "id": "",
+          "name": "olive oil",
           "amout": 2
         }
       ]
@@ -21,29 +44,19 @@
   ],
   "compositions": [
     {
-      "id": "1",
-      "name": "Meat",
-      "amout": "1"
+      "name": " natural lemon oil",
+      "amout": 3,
+      "id": 1
     },
     {
-      "id": "itNBiq4",
-      "name": "bread",
-      "amout": 1
-    },
-    {
-      "id": "bsDj7MD",
-      "name": "Meatt",
-      "amout": 3
-    },
-    {
-      "id": "VOGDjWx",
-      "name": "heh",
-      "amout": 2
-    },
-    {
-      "name": "breaduu",
+      "name": "oil essentiel",
       "amout": 1,
-      "id": "Uty7HF2"
+      "id": 2
+    },
+    {
+      "name": "glycerin",
+      "amout": 1,
+      "id": 3
     }
   ]
 }

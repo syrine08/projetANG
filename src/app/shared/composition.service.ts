@@ -66,10 +66,13 @@ export class CompositionService {
       'http://localhost:3000/' + 'compositions?name_like=' + q + '&amout_like=' + a
     );
   }
-  /*
-  DeleteCmp(index: number){
-    this.compositions.splice(index, 1);
-    this.compositionChanges.next(this.compositions.slice());
-
-  }*/
+  DeleteCmp(id: number){
+    return this.http
+      .delete('http://localhost:3000/Compositions/' + id)
+      .pipe(
+        tap(() =>  {
+          this.CmpsChanged.next();
+        }))
+      ;
+  }
 }

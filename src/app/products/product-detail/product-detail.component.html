@@ -14,17 +14,19 @@
 </div>
 <div class="row">
   <div class="btn-group" role="group" aria-label="Basic example">
-    <button class="btn btn-success" (click)="onAddCmp()" style="cursor: pointer;" >To composition</button>
+    <button class="btn btn-success" (click)="onAddCmp()" style="cursor: pointer;" >Add to composition</button>
     <button type="button" class="btn btn-danger" (click)="onEditProd()" >Edit Product</button>
-    <button type="button" class="btn btn-warning" (click)="onDeleteProd()">Delete Recipe</button>
+    <button type="button" class="btn btn-warning" (click)="onDeleteProd()">Delete Product</button>
   </div>
 </div>
-
+<h5>Description :</h5>
 <div class="row">
   <div class="col-xs-12">
+
     {{ product?.description }}
   </div>
 </div>
+<h5>Compositions : </h5>
 <div class="row">
   <div class="col-xs-12">
     <ul class="list-group">

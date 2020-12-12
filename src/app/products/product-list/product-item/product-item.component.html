@@ -4,14 +4,15 @@
   routerLinkActive="active"
   class="list-group-item clearfix">
   <div class="pull-left" >
-    <h4 class="list-group-item-heading">{{ product.name }}</h4>
-    <p class="list-group-item-text">{{ product.description }}</p>
+    <h4 class="p-3 mb-2 bg-secondary text-white">Name : {{ product.name }}</h4>
+
+    <h5 class="p-3 mb-2 bg-success text-white">{{ product.description }}</h5>
   </div>
-  <span class="pull-right ">
+  <span class="pull-right" >
         <img
           [src]="product.imagePath"
           alt="{{ product.name }}"
           class="img-responsive"
-          style="max-height: 50px;">
+          style="max-height: 90px;  margin-left: 20px;">
       </span>
 </a>

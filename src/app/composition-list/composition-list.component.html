@@ -24,18 +24,26 @@
       >
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
               [disabled]="!f.valid">Search</button>
+      <button class="btn btn-outline-info" type="button" (click)="annuler()"
+             >Clear</button>
     </form>
 
     <hr>
     <ul class="list-group">
 
-         <a
-        class="list-group-item"
+         <a class="list-group-item "
 
-        *ngFor="let composition of compositions; let i = index "
+        *ngFor="let composition of compositions | paginate: {itemsPerPage:4,currentPage:p} ; let i = index "
       >
+
         {{ composition.name }} ({{ composition.amout }})
+           <button class="btn btn-outline-danger " type="button" (click)="onDelete(composition.id)"
+           >X</button>
       </a>
+
+      <pagination-controls (pageChange) = "p = $event"></pagination-controls>
     </ul>
+
   </div>
+
 </div>
